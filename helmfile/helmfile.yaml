@@ -1,0 +1,12 @@
+repositories:
+- name: local
+  url: "file://../helm_chart"
+
+releases:
+- name: demo
+  namespace: demo
+  chart: local
+  createNamespace: true
+  values:
+    - ../helm_chart/values.yaml
+    - ../helm_chart/values-secret.sops.yaml

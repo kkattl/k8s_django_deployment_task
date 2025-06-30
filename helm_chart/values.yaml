@@ -1,0 +1,28 @@
+replicaCount: 2
+revisionHistoryLimit: 2
+
+image:
+  repository: 176703803835.dkr.ecr.us-east-1.amazonaws.com/sample-django
+  tag: "latest"
+  pullPolicy: IfNotPresent
+  containerPort: 8080
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+host: demo.example.com      
+env:                        
+  DJANGO_ALLOWED_HOSTS: "demo.example.com"
+  DJANGO_SETTINGS_MODULE: "config.settings"
+
+# autoscaling
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  cpuTarget: 80          

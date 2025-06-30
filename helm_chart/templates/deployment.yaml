@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "demo.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels: {{- include "demo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "demo.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: web
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.image.containerPort }}
+        envFrom:
+        - configMapRef: { name: {{ include "demo.fullname" . }}-env }
+        - secretRef:    { name: {{ include "demo.fullname" . }}-secret }
+        livenessProbe:
+          httpGet:
+            path: /health/
+            port: {{ .Values.image.containerPort }}
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: {{ .Values.image.containerPort }}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources: {{- toYaml .Values.resources | nindent 10 }}

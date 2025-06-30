@@ -1,0 +1,21 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: demo-django
+  region: us-east-1
+  version: "1.29"
+
+availabilityZones: 
+  - us-east-1a
+  - us-east-1b  
+
+managedNodeGroups:
+- name: spot-small
+  instanceTypes: ["t3.small","t3.micro"]     
+  maxPodsPerNode: 30 
+  desiredCapacity: 1
+  spot: true
+  ssh:
+    allow: true
+    publicKeyName: TZ          
