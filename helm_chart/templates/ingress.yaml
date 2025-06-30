@@ -7,7 +7,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
-    cert-manager.io/cluster-issuer: letsencrypt          # див. issuer нижче
+    cert-manager.io/cluster-issuer: letsencrypt         
 spec:
   ingressClassName: alb
   tls:

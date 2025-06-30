@@ -11,11 +11,13 @@ availabilityZones:
   - us-east-1b  
 
 managedNodeGroups:
-- name: spot-small
-  instanceTypes: ["t3.small","t3.micro"]     
-  maxPodsPerNode: 30 
+- name: spot-mid
+  instanceTypes: ["t3.medium"]            
   desiredCapacity: 1
+  minSize: 1
+  maxSize: 2
   spot: true
+  maxPodsPerNode: 35  
   ssh:
     allow: true
     publicKeyName: TZ          
