@@ -1,0 +1,4 @@
+vpc_id              = "vpc-0c7439ba5803ca867"
+private_subnet_ids  = ["us-east-1a", "us-east-1b"]
+db_username         = "dbadmin"
+db_name             = "appdb"

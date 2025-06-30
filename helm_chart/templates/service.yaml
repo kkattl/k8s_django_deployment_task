@@ -6,5 +6,5 @@ spec:
   type: ClusterIP
   selector: {{- include "demo.selectorLabels" . | nindent 4 }}
   ports:
-  - port: 8080
+  - port: 8000
     targetPort: {{ .Values.image.containerPort }}
